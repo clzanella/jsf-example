@@ -1,0 +1,60 @@
+
+Pré requisitos:
+
+- Instalação do postgree 9.x
+- Instação do jdk 1.8
+- Instalação do maven
+
+
+1 - Comandos para configuração do banco Postgree:
+
+sudo -u postgres psql
+
+postgres=# CREATE DATABASE lancamentos;
+postgres=# CREATE USER sa WITH ENCRYPTED PASSWORD '12345678';
+postgres=# GRANT ALL PRIVILEGES ON DATABASE lancamentos TO sa;
+
+2 - Comandos DDL:
+
+    create table Item (
+       oid int4 not null,
+        descricao varchar(255),
+        valor float8,
+        primary key (oid)
+    )
+
+    create table Lancamento (
+       oid int4 not null,
+        dt_final date,
+        dt_inicial date,
+        observacao varchar(1000),
+        vl_total float8,
+        primary key (oid)
+    )
+
+    create table LancamentoItem (
+       oid_lancamento int4 not null,
+        oid_item int4 not null
+    )
+
+    alter table LancamentoItem 
+       add constraint FK44hb3fel8r9xgkc6no3cago84 
+       foreign key (oid_item) 
+       references Item
+
+    alter table LancamentoItem 
+       add constraint FK4fvs31cw7a8ds6da86ykncj34 
+       foreign key (oid_lancamento) 
+       references Lancamento
+
+3 - Comando para executar o servidor
+
+mvn tomcat7:run-war
+
+
+4 - Endereço das páginas
+
+- http://localhost:8080/lancamento.xhtml?id=1
+- http://localhost:8080/intersecao.xhtml
+
+

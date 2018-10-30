@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Lançamento</title>
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{lancamentoBean.lancamentoOid}" />
+        <f:event type="preRenderView" listener="#{lancamentoBean.init}" />
+    </f:metadata>
+
+</h:head>
+<h:body style="margin-left:30px">
+    <h1>Lançamento:</h1>
+
+    <h:form>
+
+        <h:panelGrid columns="2">
+
+            <h:outputLabel value="Id: "/>
+            <h:inputText value="#{lancamentoBean.lancamento.oid}" disabled="true"/>
+
+            <h:outputLabel value="Valor total: "/>
+            <h:inputText value="#{lancamentoBean.lancamento.valorTotal}" disabled="true"/>
+
+            <h:outputLabel value="Data inicial: "/>
+            <h:inputText value="#{lancamentoBean.lancamento.dataInicial}" >
+                <f:convertDateTime
+                        pattern="dd/MM/yyyy"
+                        timeZone="Americas/Sao_Paulo"
+                        locale="pt_BR"
+                />
+            </h:inputText>
+
+            <h:outputLabel value="Data final: "/>
+            <h:inputText value="#{lancamentoBean.lancamento.dataFinal}" >
+                <f:convertDateTime
+                        pattern="dd/MM/yyyy"
+                        timeZone="Americas/Sao_Paulo"
+                        locale="pt_BR"
+                />
+            </h:inputText>
+
+            <h:outputLabel value="Observacao: "/>
+            <h:inputText value="#{lancamentoBean.lancamento.observacao}" />
+
+
+            <h2>Items:</h2>
+            <h:outputText value=""/>
+
+            <h:dataTable value="#{lancamentoBean.lancamento.items}" var="item">
+
+                <h:column>
+                    #{item.descricao}
+                    <f:facet name="header">Descricao</f:facet>
+                </h:column>
+                <h:column>
+                    #{item.valor}
+                    <f:facet name="header">Valor</f:facet>
+                </h:column>
+                <h:column>
+                    <p:commandButton value="-" action="#{lancamentoBean.removerItem(item)}" update="@all"/>
+                    <f:facet name="header"></f:facet>
+                </h:column>
+
+            </h:dataTable>
+            <h:outputText value=""/>
+
+            <h2>Novo item:</h2>
+            <h:outputText value=""/>
+
+
+        </h:panelGrid>
+
+        <br/>
+
+        <h:panelGrid columns="5">
+
+            <h:outputLabel value="Descriçao: "/>
+            <h:inputText value="#{lancamentoBean.item.descricao}"/>
+
+            <h:outputLabel value="Valor: "/>
+            <h:inputText value="#{lancamentoBean.item.valor}"/>
+
+            <p:commandButton value="+" action="#{lancamentoBean.adicionarItem}" update="@all"/>
+        </h:panelGrid>
+
+        <br/>
+
+        <p:commandButton value="Salvar" icon="ui-icon-check" action="#{lancamentoBean.salvar}" update="@all"/>
+
+    </h:form>
+
+</h:body>
+</html>

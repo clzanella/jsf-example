@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Intersecoes</title>
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{lancamentoBean.lancamentoOid}" />
+        <f:event type="preRenderView" listener="#{lancamentoBean.init}" />
+    </f:metadata>
+
+</h:head>
+<h:body style="margin-left:30px">
+    <h1>Intersecao:</h1>
+
+    <h:form id="myform">
+
+        <h:panelGrid columns="2">
+
+            <h2>Faixa1:</h2>
+            <h:outputText value=""/>
+
+            <h:outputLabel value="Inicio: "/>
+            <h:inputText value="#{intersecaoBean.faixa1.inicio}"/>
+
+            <h:outputLabel value="Termino: "/>
+            <h:inputText value="#{intersecaoBean.faixa1.termino}"/>
+
+            <h2>Faixa2:</h2>
+            <h:outputText value=""/>
+
+            <h:outputLabel value="Inicio: "/>
+            <h:inputText value="#{intersecaoBean.faixa2.inicio}"/>
+
+            <h:outputLabel value="Termino: "/>
+            <h:inputText value="#{intersecaoBean.faixa2.termino}"/>
+
+        </h:panelGrid>
+
+        <br/>
+        <p:commandButton value="Consultar" icon="ui-icon-check" action="#{intersecaoBean.consultar}" update="@all" />
+
+        <p:messages id="messages" showDetail="true" closable="true" />
+
+    </h:form>
+
+
+</h:body>
+</html>
