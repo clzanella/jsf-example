@@ -1,7 +1,7 @@
 
 Pré requisitos:
 
-- Instalação do postgree 9.x
+- Instalação do postgree 9.x ( https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04 )
 - Instação do jdk 1.8
 - Instalação do maven
 
